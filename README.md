@@ -19,3 +19,19 @@ The current manufacturing data meets the design specifications for all manufactu
 
 ![alt text](https://github.com/CCoelho372/MechaCar_Statistical_Analysis/blob/main/lot_summary.PNG)
 
+## T-Tests on Suspension Coils
+
+###### Summary
+
+Lot 1 is not statistically different from the population mean of 1,500 pounds per square inch. For lot 1, t=0, and it has a p-value of 1. Only random chance in lot 1 would cause a difference from 1,500 pounds. Lot 2 has a p-value of .6072 which would give a high chance of being 1,500 pounds of psi. Lot 3 has a p-value of .04168 which means the chance of the PSI being 1,500 pounds are not as statistically significant. I would use tires from lot 1 and 2 for more reliability.
+
+![alt text](https://github.com/CCoelho372/MechaCar_Statistical_Analysis/blob/main/t.test_psi.PNG)
+
+## Study Design: MechaCar vs Competition
+
+###### Study Design
+
+The metrics that will be tested in this study design are MechaCar cost in relation to the competition based on safety rating. We will determine cars with high safety ratings have a higher cost. Otherwise cars cost does not increase with a higher safety rating. A linear regression model will be developed for MechaCar and the competition. An r squared close to 1 will be the result for the alternative hypothesis to be true. Most important data for the statisitcal statistics will be car make, cost, car size, and overall safety rating.
+
+
+
