@@ -9,6 +9,7 @@ summary(lm(mpg ~ vehicle_length + vehicle_weight + spoiler_angle + ground_cleara
 
 -------------------------
 
+Deliverable 1
 
 R version 4.0.2 (2020-06-22) -- "Taking Off Again"
 Copyright (C) 2020 The R Foundation for Statistical Computing
@@ -89,3 +90,137 @@ Warning messages:
   the response appeared on the right-hand side and was dropped
 2: In model.matrix.default(mt, mf, contrasts) :
   problem with term 6 in model.matrix: no columns are assigned
+
+
+------------------------
+
+Deliverable 2
+
+> suspension <- read.csv(file = "C:/Users/ccoelho/Data_Analytics/Mod_15/Suspension_Coil.csv", header = TRUE, sep = ",")
+> View(suspension)
+> suspension %>%
++ summarize(PSI_mean = mean(PSI))
+  PSI_mean
+1  1498.78
+> summarize(PSI_median = median(PSI))
+Error in median(PSI) : object 'PSI' not found
+> suspension %>%
++ summarize(PSI_median = median(PSI))
+  PSI_median
+1       1500
+> suspension %>%
++ summarize(PSI_variance = var(PSI))
+  PSI_variance
+1     62.29356
+> suspension %>%
++ PSI_sd = sd(PSI)
+Error in is.data.frame(x) : object 'PSI' not found
+> suspension %>%
++ summarize(PSI_sd = sd(PSI))
+    PSI_sd
+1 7.892627
+> total_summary %>% +
++ summarize(PSI_mean = mean(PSI),)
+Error in total_summary %>% +summarize(PSI_mean = mean(PSI), ) : 
+  object 'total_summary' not found
+> total_summary %>% +
++ summarize(PSI_mean = mean(PSI),PSI_median = median(PSI), PSI_variance = var(PSI), PSI_sd = sd(PSI))
+Error in total_summary %>% +summarize(PSI_mean = mean(PSI), PSI_median = median(PSI),  : 
+  object 'total_summary' not found
+> summarize(PSI_mean = mean(PSI),PSI_median = median(PSI), PSI_variance = var(PSI), PSI_sd = sd(PSI))
+Error in mean(PSI) : object 'PSI' not found
+> total_summary %>% summarize(PSI_mean = mean(PSI),PSI_median = median(PSI), PSI_variance = var(PSI), PSI_sd = sd(PSI))
+Error in summarize(., PSI_mean = mean(PSI), PSI_median = median(PSI),  : 
+  object 'total_summary' not found
+> suspension_table %>% summarize(PSI_mean = mean(PSI),PSI_median = median(PSI), PSI_variance = var(PSI), PSI_sd = sd(PSI))
+Error in summarize(., PSI_mean = mean(PSI), PSI_median = median(PSI),  : 
+  object 'suspension_table' not found
+> suspension %>% summarize(PSI_mean = mean(PSI),PSI_median = median(PSI), PSI_variance = var(PSI), PSI_sd = sd(PSI))
+  PSI_mean PSI_median PSI_variance   PSI_sd
+1  1498.78       1500     62.29356 7.892627
+> View(suspension)
+> View(suspension)
+> suspension %>% group_by(Manufacturing_Lot) %>% (PSI_mean = mean(PSI),PSI_median = median(PSI), PSI_variance = var(PSI), PSI_sd = sd(PSI))
+Error: unexpected ',' in "suspension %>% group_by(Manufacturing_Lot) %>% (PSI_mean = mean(PSI),"
+> suspension %>% group_by(Manufacturing_Lot) %>% summarize(PSI_mean = mean(PSI),PSI_median = median(PSI), PSI_variance = var(PSI), PSI_sd = sd(PSI))
+# A tibble: 3 x 5
+  Manufacturing_Lot PSI_mean PSI_median PSI_variance PSI_sd
+  <chr>                <dbl>      <dbl>        <dbl>  <dbl>
+1 Lot1                 1500       1500         0.980  0.990
+2 Lot2                 1500.      1500         7.47   2.73 
+3 Lot3                 1496.      1498.      170.    13.0 
+
+--------------------------
+
+Deliverable 3
+
+ 
+> sample <- suspension %>% sample_n(50)
+> View(sample)
+> sample2 <- suspension %>% sample_n(50)
+> View(sample)
+> View(sample2)
+> t.test(sample$PSI, sample2$PSI)
+
+	Welch Two Sample t-test
+
+data:  sample$PSI and sample2$PSI
+t = -0.81492, df = 79.123, p-value = 0.4176
+alternative hypothesis: true difference in means is not equal to 0
+95 percent confidence interval:
+ -3.442453  1.442453
+sample estimates:
+mean of x mean of y 
+  1498.26   1499.26 
+
+> t.test(suspension$PSI, mu = 1500)
+
+	One Sample t-test
+
+data:  suspension$PSI
+t = -1.8931, df = 149, p-value = 0.06028
+alternative hypothesis: true mean is not equal to 1500
+95 percent confidence interval:
+ 1497.507 1500.053
+sample estimates:
+mean of x 
+  1498.78 
+
+> t.test(subset(suspension, Manufacturing_Lot =="Lot1")$PSI, mu = 1500)
+
+	One Sample t-test
+
+data:  subset(suspension, Manufacturing_Lot == "Lot1")$PSI
+t = 0, df = 49, p-value = 1
+alternative hypothesis: true mean is not equal to 1500
+95 percent confidence interval:
+ 1499.719 1500.281
+sample estimates:
+mean of x 
+     1500 
+
+> t.test(subset(suspension, Manufacturing_Lot =="Lot2")$PSI, mu = 1500)
+
+	One Sample t-test
+
+data:  subset(suspension, Manufacturing_Lot == "Lot2")$PSI
+t = 0.51745, df = 49, p-value = 0.6072
+alternative hypothesis: true mean is not equal to 1500
+95 percent confidence interval:
+ 1499.423 1500.977
+sample estimates:
+mean of x 
+   1500.2 
+
+> t.test(subset(suspension, Manufacturing_Lot =="Lot3")$PSI, mu = 1500)
+
+	One Sample t-test
+
+data:  subset(suspension, Manufacturing_Lot == "Lot3")$PSI
+t = -2.0916, df = 49, p-value = 0.04168
+alternative hypothesis: true mean is not equal to 1500
+95 percent confidence interval:
+ 1492.431 1499.849
+sample estimates:
+mean of x 
+  1496.14 
